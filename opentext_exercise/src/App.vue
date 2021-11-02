@@ -3,12 +3,16 @@
     <h1>User Directory</h1>
     <div class="search-bar-container">
       <div class="search-bar">
-        <input id="search-box" type="text" v-model="searchQuery" placeholder="Search..." />
+        <input
+          id="search-box"
+          type="text"
+          v-model="searchQuery"
+          placeholder="Search..."
+        />
         <button @click="clearSearch" id="clear-button">Clear</button>
       </div>
     </div>
-
-    <div class="results" v-for="user in filteredUsers" :key="user.id">
+    <div class="search-results" v-for="user in filteredUsers" :key="user.id">
       <h2 class="user-name">{{ user.name }}</h2>
     </div>
   </div>
@@ -35,9 +39,9 @@ export default {
       }
     },
 
-    clearSearch() {
-      this.searchQuery = ''
-    }
+    clearSearch: function () {
+      this.searchQuery = "";
+    },
   },
 
   created() {
@@ -45,7 +49,7 @@ export default {
   },
 
   computed: {
-    filteredUsers() {
+    filteredUsers: function () {
       return this.users.filter((user) => {
         return user.name.toLowerCase().match(this.searchQuery.toLowerCase());
       });
@@ -69,6 +73,10 @@ export default {
   opacity: 1;
 }
 
+.user-name {
+  text-align: center;
+}
+
 .search-bar {
   margin-left: auto;
   margin-right: auto;
@@ -80,9 +88,5 @@ export default {
 
 #clear-button {
   height: 2.45em;
-}
-
-.user-name {
-  text-align: center;
 }
 </style>
