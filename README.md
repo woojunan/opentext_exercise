@@ -1,2 +1,1 @@
-# opentext_exercise
-VueJS Exercise
+# VueJS Exercise
