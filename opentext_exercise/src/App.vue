@@ -69,10 +69,6 @@ export default {
   opacity: 1;
 }
 
-.search-bar-container {
-  padding: 1rem 1.5rem!important;
-}
-
 .search-bar {
   margin-left: auto;
   margin-right: auto;
