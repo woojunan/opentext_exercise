@@ -20,7 +20,12 @@
     </section>
     <section v-else>
       <div v-if="loading">Loading...</div>
-      <div class="search-results" v-else v-for="user in filteredUsers" :key="user.id">
+      <div
+        class="search-results"
+        v-else
+        v-for="user in filteredUsers"
+        :key="user.id"
+      >
         <h2 class="user-name">{{ user.name }}</h2>
       </div>
     </section>
@@ -52,7 +57,7 @@ export default {
           console.log(error);
           this.errored = true;
         })
-        .finally(() => this.loading = false)
+        .finally(() => (this.loading = false));
     },
 
     /* Function to clear the search query */
