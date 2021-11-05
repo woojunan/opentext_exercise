@@ -12,32 +12,47 @@
         <button @click="clearSearch" id="clear-button">Clear</button>
       </div>
     </div>
-    <div class="search-results" v-for="user in filteredUsers" :key="user.id">
-      <h2 class="user-name">{{ user.name }}</h2>
-    </div>
+    <section v-if="errored">
+      <p>
+        We are not able to retrieve this data at the moment, please try again
+        later
+      </p>
+    </section>
+    <section v-else>
+      <div v-if="loading">Loading...</div>
+      <div class="search-results" v-else v-for="user in filteredUsers" :key="user.id">
+        <h2 class="user-name">{{ user.name }}</h2>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
       users: [],
       searchQuery: "",
+      loading: true,
+      errored: false,
     };
   },
 
   methods: {
     /* Asynchronous function to fetch list of users from API */
     async getUsers() {
-      try {
-        const response = await this.$http.get(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        this.users = response.data;
-      } catch (error) {
-        console.log(error);
-      }
+      await axios
+        .get("https://jsonplaceholder.typicode.com/users")
+        .then((response) => {
+          this.users = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.errored = true;
+        })
+        .finally(() => this.loading = false)
     },
 
     /* Function to clear the search query */
