@@ -28,6 +28,7 @@ export default {
   },
 
   methods: {
+    /* Asynchronous function to fetch list of users from API */
     async getUsers() {
       try {
         const response = await this.$http.get(
@@ -39,6 +40,7 @@ export default {
       }
     },
 
+    /* Function to clear the search query */
     clearSearch: function () {
       this.searchQuery = "";
     },
@@ -49,6 +51,7 @@ export default {
   },
 
   computed: {
+    /* Function to return new list of users based off the search query */
     filteredUsers: function () {
       return this.users.filter((user) => {
         return user.name.toLowerCase().match(this.searchQuery.toLowerCase());
